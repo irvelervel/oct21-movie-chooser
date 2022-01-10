@@ -2,6 +2,7 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Container, Row, Col, Form } from 'react-bootstrap'
 import { Component } from 'react'
+import MovieDetails from './components/MovieDetails'
 
 // for creating a state object, you need a Class based component...
 // just write the Class signature and wrap the return statement in a render() method
@@ -9,6 +10,12 @@ import { Component } from 'react'
 class App extends Component {
   state = {
     movieTitle: 'Batman Begins',
+  }
+
+  componentDidMount() {
+    console.log('App just finished the mounting phase!')
+    // just happens once for every lifetime of this component
+    // it's the perfect place for expensive initial operations like a fetch()
   }
 
   render() {
@@ -38,6 +45,11 @@ class App extends Component {
                   <option>The Flash</option>
                 </Form.Control>
               </Form.Group>
+            </Col>
+          </Row>
+          <Row className='justify-content-center mt-3'>
+            <Col md={6}>
+              <MovieDetails title={this.state.movieTitle} />
             </Col>
           </Row>
         </Container>
