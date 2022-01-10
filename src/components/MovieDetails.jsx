@@ -1,7 +1,7 @@
 // also MovieDetails is going to be a Class Component
 
 import { Component } from "react";
-import { Card } from 'react-bootstrap'
+import { Card, Spinner } from 'react-bootstrap'
 
 class MovieDetails extends Component {
 
@@ -13,8 +13,6 @@ class MovieDetails extends Component {
         // this will happen AFTER the initial render() invokation
         // here I can grab the movie details!
         this.fetchMovieDetails()
-
-        this.props.changeStateFromChild()
     }
 
     fetchMovieDetails = async () => {
@@ -38,20 +36,41 @@ class MovieDetails extends Component {
     }
 
     render() {
-        // render is not a good place for data fetching! :(
+        // render() is not a good place for data fetching! :(
+        // render() fires again when the state changes!
+        console.log('render! movieInfo is', this.state.movieInfo)
         return (
             <div>
                 <h2>MOVIE DETAILS</h2>
-                <Card>
-                    <Card.Img variant="top" src="https://placekitten.com/200/300" />
-                    <Card.Body className="text-dark">
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the bulk of
-                            the card's content.
-                        </Card.Text>
-                    </Card.Body>
-                </Card>
+                {
+                    this.state.movieInfo ? (
+                        <Card>
+                            <Card.Img variant="top" src={this.state.movieInfo.Poster} />
+                            <Card.Body className="text-dark">
+                                <Card.Title>{this.state.movieInfo.Title}</Card.Title>
+                                <Card.Text>
+                                    {this.state.movieInfo.Year} - {this.state.movieInfo.imdbID}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    ) : (
+                        <Spinner animation="border" variant="success" />
+                    )
+                }
+                {/* this is the short circuit && variant */}
+                {/* {
+                    this.state.movieInfo && (
+                        <Card>
+                            <Card.Img variant="top" src={this.state.movieInfo.Poster} />
+                            <Card.Body className="text-dark">
+                                <Card.Title>{this.state.movieInfo.Title}</Card.Title>
+                                <Card.Text>
+                                    {this.state.movieInfo.Year} - {this.state.movieInfo.imdbID}
+                                </Card.Text>
+                            </Card.Body>
+                        </Card>
+                    )
+                } */}
             </div>
         )
     }

@@ -13,7 +13,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log('App just finished the mounting phase!')
+    // console.log('App just finished the mounting phase!')
     // just happens once for every lifetime of this component
     // it's the perfect place for expensive initial operations like a fetch()
   }
@@ -21,7 +21,7 @@ class App extends Component {
   render() {
     // the render() method is mandatory in every class component
     // it will fire again every time there's a change in the state or in the props of this component
-    console.log('render fired again!')
+    // console.log('render fired again!')
     return (
       <div className='App mt-3'>
         <Container>
